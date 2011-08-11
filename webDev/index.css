@@ -1,0 +1,17 @@
+body{
+	margin:0;
+}
+iframe{
+	border:0;
+}
+img{
+	border:0;
+}
+#note{
+	background:#F00;
+	padding:5px;
+}
+#note div{
+	background:#a00;
+	margin:5px;
+}
