@@ -2,7 +2,7 @@ body{
 	padding:0;
 	margin:0;
 	top:0;
-	background:#ccc;
+	background:#ddd;
 }
 iframe{
 	border:0;
@@ -49,22 +49,28 @@ img{
 #note div span{
 	color:#fa0300;
 }
+#selectNotice{
+	margin:20px auto;
+	display:none;
+	padding:10px;
+	color:#f00;
+	background:#fdff37;
+	width:650px;
+}
 #mask{
 	position:absolute;
-	width:100%;
-	height:100%;
-	background:#000 url("./maskbg.gif");
 	z-index:2;
+	width:400px;
+	border:solid 2px #ff1c19;
+	background:#fff;
+	overflow-x:hidden;
+	overflow-y:visible;
 }
 #mask #input{
-	position:relative;
 	margin:auto;
 	padding:10px;
 	vertical-align:center;
-	top:35%;
-	background:#fff;
-	width:400px;
-	height:280px;
+	width:380px;
 }
 #mask #selectContentsBox{
 	border:solid 2px #afc6dd;
@@ -79,6 +85,20 @@ img{
 .marked{
 	color:#0f0;
 }
+#submit{
+	margin:auto;
+	display:block;
+}
+	#submit textarea{
+		margin:auto;
+		display:block;
+		width:650px;
+		height:300px;
+	}
+	#submit input{
+		margin:auto;
+		display:block;
+	}
 /*
  * artical.php
  */

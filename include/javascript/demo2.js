@@ -3,33 +3,65 @@ var noteList;
 var selObj;
 var range;
 function init(){
-	document.getElementById("mask").style.display = "none";
+	$('#mask').css('display','none');
 	noteList = new NoteList();
+	$('#artical').mouseup(function(e){onSelected(e)});
+	var input_note = $('#note').html();
+	$('#submit').submit(function() {
+		$('#note_input').val(collectNote());
+		$('#artical_input').val( $('#artical').html() );
+		return true;
+	});
 }
-function showMask(text){
-	var content = document.getElementById("selectedContents");
-	content.innerHTML = text;
-	document.getElementById("mask").style.display = "block";
+function collectNote () {
+	var i=0;
+	var output = "";
+	while( noteList.list[i] ){
+		output += noteList.list[i].comment+"/";
+		i++;
+	}
+	return output;
+}
+function showMask(x,y,text){
+	$('#comment').html("");
+	$('#mask')
+		.css('top',y+25)
+		.css('left',x-150)
+		.show("slow");
+	$('#selectedContents').html(text);
 }
 function hideMask(){
-	document.getElementById("mask").style.display = "none";
+	$('#mask').hide("fast");
 }
-function onSelected(){
+function onSelected(e){
 	selObj = window.getSelection();
 	range = selObj.getRangeAt(0);
 	if(noteList.illegalRange(range)){
-		alert("You have marked a same range.");
+		notice("You have marked a same range.");
+		hideMask();
 		return;
 	}
 	if(range.toString().length<5){
-		alert("You selected too few word");
+		if (range.toString().length == 0) {
+			hideMask();
+			return;
+		}
+		notice("You selected too few word");
+		hideMask();
 		return;
 	}
-	showMask(selObj.toString());
+	showMask(e.clientX, e.clientY, selObj.toString());
 }
 function setComment(){
 	hideMask();
 	noteList.addList();
+}
+function notice(text) {
+	$('#selectNotice')
+		.html(text)
+		.show("slow")
+		.delay(800)
+		.fadeOut("slow");
 }
 function NoteList(){
 	this.list = new Array();
@@ -56,6 +88,9 @@ function NoteList(){
 	}
 	this.illegalRange = function (range){
 		var content = range.cloneContents();
+		if(range.endContainer.parentElement.nodeName == "SPAN"){
+			return true;
+		}
 		while(content.firstChild){
 			if (content.firstChild.nodeName=="SPAN") {
 				return 1;
@@ -104,8 +139,7 @@ function Note(){
 		var comment = document.createTextNode(this.comment);
 		var img = document.createElement("img");
 		img.addEventListener("click",function(){noteList.remove(this.parentNode)},false);
-		//img.addEventListener("click",function(){console.log(this.noteBox)},false);
-		img.src = "./close.gif";
+		img.src = "http://"+window.location.host+"/ats/img/close.gif";
 		div.appendChild(this.noteNum);
 		div.appendChild(comment);
 		div.appendChild(img);

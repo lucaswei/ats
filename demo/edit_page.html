@@ -5,6 +5,7 @@
 <link rel= "stylesheet " type= "text/css" href="demo.css" />
 </head>
 <body onload="init()">
+<script type="text/javascript" src="./jquery.js"></script>
 <script type="text/javascript" src="./demo2.js"></script>
 	<div id="mask">
 		<div id="input">
@@ -17,12 +18,22 @@
 		</div>
 	</div>
 	<div id="main">
-		<div id="artical" onmouseup="onSelected()">
+		<div id="artical">
 			Javascript DOM provides number of methods to append Div tag contents dynamically. In Javascript code you can use innerHTML, innerText or appendChild methods to append the Div HTML tag’s contents. Same Javascript DOM methods can be used to append the content of other HTML elements also. You can concatenate the previous content and new content dynamically using document object along with its method getElementById.
 			Javascript getElementById method allows you to access the properties of specified HTML tag through its id attribute value passed to the getElementById method.
 		</div>
+		<div id="selectNotice">
+		</div>
 		<div id="note">
 		</div>
+		<form method="get" action="edit_done.php" id="submit" >
+			<input type="submit" value="Post" />
+			<input type="hidden" id="id_input" value=""/>
+			<input type="hidden" id="artical_input" />
+			<input type="hidden" id="note_input" />
+			<textarea id="summary"></textarea>
+			<input type="submit" value="Post" />
+		</form>
 	</div>
 </body>
 </html>

@@ -1,0 +1,91 @@
+﻿#horizon_menu
+	{
+	font-family:Arial,微軟正黑體,新細明體;
+	font-size:13px;
+	width:100%;
+	display:block;
+	float:none;
+	}
+
+#horizon_menu span
+	{
+	display:block;
+	padding:0.5em;
+	width:7em;
+	background:url(bg.png);
+	}
+
+#horizon_menu span a,
+#horizon_menu span a:link,
+#horizon_menu span a:visited,
+#horizon_menu span a:hover
+	{
+	color:#FFF;
+	text-decoration:none;
+	}
+
+#horizon_menu ol {margin:0px;padding:0px;}
+#horizon_menu ol li
+	{
+	list-style:none;
+	margin:0px;
+	float:left;
+	background-color:#333;
+	color:#FFF;
+	}
+
+#horizon_menu ul.collapsed,#horizon_menu ul.expand
+	{
+	margin:0px;
+	}
+
+#horizon_menu ul.collapsed
+{
+	overflow: hidden;
+	height:0px;
+	width:200px;
+	padding:0px;
+	margin:0px;
+	position:absolute;
+}
+
+#horizon_menu ul.expand
+{
+	overflow: hidden;
+	width:200px;
+	padding:0px;
+	margin:0px;
+	position:absolute;
+}
+
+#horizon_menu ul.collapsed li,
+#horizon_menu ul.expand li
+	{
+	float:none;
+	display:block;
+	padding:0px 0px 0px 16px;
+	}
+
+#horizon_menu ul.collapsed a,
+#horizon_menu ul.collapsed a:link,
+#horizon_menu ul.collapsed a:visited,
+#horizon_menu ul.expand a,
+#horizon_menu ul.expand a:link,
+#horizon_menu ul.expand a:visited
+	{
+	color:#FFF;
+	display:block;
+	padding:0.3em 0.5em;
+	text-decoration:none;
+	background-color:#DE1072;
+	}
+
+#horizon_menu ul.collapsed a:hover,
+#horizon_menu ul.expand a:hover
+	{
+	color:#000;
+	display:block;
+	background-color:#AAA;
+	padding:0.3em 0.5em;
+	text-decoration:none;
+	}
