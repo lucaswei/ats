@@ -11,10 +11,10 @@
 			require_once('header.php');
 		?>
 		ddasdsd
-		<?php
-			require_once('footer.php');
-		?>
 	</div>
+	<?php
+		require_once('footer.php');
+	?>
 </body>
 </html>
 

@@ -1,0 +1,87 @@
+iframe{
+	border:0;
+}
+img{
+	border:0;
+}
+h2{
+	color:#fff;
+	text-shadow:2px 2px 2px #000;
+}
+#articals a:link {color:#fff;}
+#articals a:visited {color:#f4f4f4;}
+#articals a:hover {color:#f4f4f4;} 
+#articals a:active {color:#f00;}
+#articals{
+	margin:auto;
+	width:900px;
+}
+.artical{
+	border-bottom:3px solid teal;
+	border-bottom-style:dashed;
+	padding-bottom:20px;
+	width:800px;
+	margin:auto;
+}
+	.information .title{
+		font-size:20px;
+	}
+	.functionList{
+		font-size:18px;
+		text-align:right;
+		background:#444;
+		width:700px;
+		color:#fff;
+		padding:20px;
+		margin:auto;
+	}
+	.paragraph{
+		background:#fff;
+		padding:19px;
+		width:700px;
+		margin:auto;
+		border:1px #444 solid;
+	}
+	.comments{
+		width:750px;
+		right:0px;
+		margin:auto;
+	}
+	.comment{
+		background:teal;
+		margin:10px;
+		width:600px;
+		padding:20px;
+	}
+		.comment div{
+			margin:5px;
+		}
+	.include{
+		background:#fff;
+		padding:20px;
+	}
+	.global div{
+		background:#fff;
+		margin:1px;
+		padding-left:15px;
+	}
+	.local div{
+		background:#fff;
+		margin:1px;
+		padding-left:15px;
+	}
+	.summary{
+		background:#fff;
+		padding:20px;
+	}
+.marked{
+	color:#178918;
+}
+.global{
+	color:#178918;
+	font-weight:bold;
+}
+.local{
+	color:#dc0300;
+	font-weight:bold;
+}

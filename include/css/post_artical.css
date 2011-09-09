@@ -1,0 +1,17 @@
+iframe{
+	border:0;
+}
+img{
+	border:0;
+}
+#post_artical{
+	margin:auto;
+	padding:20px;
+}
+	#post_artical td{
+		padding:3px;
+	}
+	#content{
+		width:700px;
+		height:300px;
+	}

@@ -1,0 +1,21 @@
+iframe{
+	border:0;
+}
+img{
+	border:0;
+}
+#artical_list{
+	margin;20px;
+	min-height:500px;
+}
+
+#artical_list table{
+		margin:auto;
+	}
+	#artical_list table td{
+		min-width:100px;
+		max-width:250px;
+		padding:3px;
+		overflow:hidden;
+		text-align:center;
+	}

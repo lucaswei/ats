@@ -1,5 +1,8 @@
 <?php
 require_once('./.sqlinfo.php');
+if ($_SESSION['user_id')=="") {
+	return;
+}
 $user = $_SESSION['account'];
 $father_artical = $_GET['father_artical'];
 $time = time();
@@ -15,33 +18,42 @@ while($row = mysql_fetch_array($result)){
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<link rel= "stylesheet " type= "text/css" href="" />
+<link rel= "stylesheet " type= "text/css" href="css/post_artical.css" />
 </head>
 <body>
-<form action="./save_artical.php" method="post">
-	<table>
-		<tr>
-			<td>Title</td>
-			<td><input type="text" name="title" id=""/></td>
-		</tr>
-		<input type="hidden" name="father_artical" value="<?php echo $father_artical;?>"/>
-		<tr>
-			<td>Class</td>
-			<td>
-				<select name="class">
-					<?php
-					echo $option;
-					?>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2"><textarea name="content"></textarea></td>
-		</tr>
-		<tr>
-			<td colspan="2"><input type="submit"/></td>
-		</tr>
-	</table>
-</form>
+<div id="main">
+	<?php
+		require_once('header.php');
+	?>
+		<form action="./save_artical.php" method="post">
+		<table id="post_artical">
+			<tr>
+				<td>Title</td>
+				<td><input type="text" name="title" id=""/></td>
+			</tr>
+			<input type="hidden" name="father_artical" value="<?php echo $father_artical;?>"/>
+			<tr>
+				<td>Class</td>
+				<td>
+					<select name="class">
+						<?php
+						echo $option;
+						?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><textarea id="content" name="content"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Post"/></td>
+			</tr>
+		</table>
+	</form>
+</div>
+	<?php
+		require_once('footer.php');
+	?>
+
 </body>
 </html>

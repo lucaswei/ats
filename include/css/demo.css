@@ -10,7 +10,7 @@ iframe{
 img{
 	border:0;
 }
-#main{
+#content{
 	margin:auto;
 	width:800px;
 }
@@ -21,29 +21,54 @@ img{
 	margin:20px;
 	padding:5px;
 }
-#note{
+#localNote{
 	margin:auto;
-	background:#afc6ff;
+	background:#ff9291;
 	width:650px;
 	padding:7px;
 }
-#note div{
+#localNote div{
 	background:#fff;
 	color:#000;
 	margin:5px;
 	padding:3px;
 	position:relative;
 }
-#note div img{
+#localNote div img{
 	display:none;
 	position:absolute;
 	top:0;
 	right:0;
 }
-#note div:hover img{
+#localNote div:hover img{
 	display:block;
 }
-#note div span{
+#localNote div span{
+	color:#fa0300;
+}
+#globalNote{
+	margin:auto;
+	background:#afc6ff;
+	width:650px;
+	padding:7px;
+}
+#globalNote div{
+	background:#fff;
+	color:#000;
+	margin:5px;
+	padding:3px;
+	position:relative;
+}
+#globalNote div img{
+	display:none;
+	position:absolute;
+	top:0;
+	right:0;
+}
+#globalNote div:hover img{
+	display:block;
+}
+#globalNote div span{
 	color:#fa0300;
 }
 #selectNotice{
@@ -80,8 +105,22 @@ img{
 	max-width:350px;
 	max-height:150px;
 }
-.marked{
+#mask #local_button{
+	background:#dc0300;
+	border:1px solid #dc0300;
+	color:#fff;
+}
+#mask #global_button{
+	background:#178918;
+	border:1px solid #178918;
+	color:#fff;
+}
+.global{
 	color:#178918;
+	font-weight:bold;
+}
+.local{
+	color:#dc0300;
 	font-weight:bold;
 }
 #submit{
@@ -98,20 +137,3 @@ img{
 		margin:auto;
 		display:block;
 	}
-/*
- * artical.php
- */
-.artical{
-	background:#007afa;
-	border:solid 2px #fff;
-	width:800px;
-	margin:20px;
-	padding:5px;
-}
-	.artical .paragraph{
-		background:#fff;
-	}
-	.artical .comment{
-		background:#fff;
-	}
-

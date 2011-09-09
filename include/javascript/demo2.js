@@ -1,21 +1,30 @@
 "use strict";
-var noteList;
+var globalList;
+var localList;
 var selObj;
 var range;
 function init(){
 	$('#mask').css('display','none');
-	noteList = new NoteList();
+	globalList = new NoteList("global");
+	localList = new NoteList("local");
 	$('#artical').mouseup(function(e){onSelected(e)});
 	var input_note = $('#note').html();
 	$('#submit').submit(function() {
-		$('#note_input').val(collectNote());
+		$('#global_input').val(collectNote("global"));
+		$('#local_input').val(collectNote("local"));
 		$('#artical_input').val( $('#artical').html() );
 		return true;
 	});
 }
-function collectNote () {
+function collectNote (type) {
 	var i=0;
 	var output = "";
+	var noteList;
+	if (type == "global") {
+		noteList = globalList;
+	}else if (type == "local" ) {
+		noteList = localList;
+	}
 	while( noteList.list[i] ){
 		output += noteList.list[i].comment+"/";
 		i++;
@@ -27,8 +36,14 @@ function showMask(x,y,text){
 	$('#mask')
 		.css('top',y+25)
 		.css('left',x-150)
-		.show("slow");
+		.show("fast");
 	$('#selectedContents').html(text);
+	$('#mask')
+		.focus()
+		.blur( function(){
+				hideMask();
+			}
+		);
 }
 function hideMask(){
 	$('#mask').hide("fast");
@@ -36,8 +51,13 @@ function hideMask(){
 function onSelected(e){
 	selObj = window.getSelection();
 	range = selObj.getRangeAt(0);
-	if(noteList.illegalRange(range)){
-		notice("You have marked a same range.");
+	var error;
+	/* setting */
+	$('#global_button').css('display','inline');
+	$('#local_button').css('display','inline');
+	$('#comment').val("");
+	if(error = illegalRange(range)){
+		notice(error);
 		hideMask();
 		return;
 	}
@@ -52,9 +72,17 @@ function onSelected(e){
 	}
 	showMask(e.clientX, e.clientY, selObj.toString());
 }
-function setComment(){
+function setComment(type){
 	hideMask();
-	noteList.addList();
+	if( $('#comment').val() == "" ){
+		notice("comments can't be null");
+		return;
+	}
+	if (type == "global") {
+		globalList.addList();
+	}else if (type == "local") {
+		localList.addList();
+	}
 }
 function notice(text) {
 	$('#selectNotice')
@@ -63,18 +91,35 @@ function notice(text) {
 		.delay(800)
 		.fadeOut("slow");
 }
-function NoteList(){
+function illegalRange(range){
+	var content = range.cloneContents();
+	while(content.firstChild){
+		if (content.firstChild.nodeName=="SPAN") {
+			return "You have marked a same range.";
+		}
+		content.removeChild(content.firstChild);
+	}
+	var className = range.endContainer.parentNode.className;
+	if (className == "global") {
+		$('#global_button').css('display','none');
+	}else if (className == "local") {
+		return "You can't comment between 'local' comment";
+	};
+	return false;
+}
+function NoteList(type){
 	this.list = new Array();
-	this.note = document.getElementById("note");
+	this.type = type;
+	this.note = document.getElementById(this.type+"Note");
 	this.divNumber=0;
 
 	this.addList = function(){
 		var divNumber = this.divNumber;
-		this.list[divNumber] = new Note();
+		this.list[divNumber] = new Note( this.type, this );
 		this.list[divNumber].addNote();
 		divNumber++;
-		var note = document.getElementById("note");
-		var tag = document.getElementsByClassName("marked");
+		var note = document.getElementById(this.type+"Note");
+		var tag = document.getElementsByClassName( this.type.toString() );
 		for (var i = 0; i < this.list.length; i++) {
 			var text = tag[i].firstChild.nodeValue;
 			for (var j = 0; j < this.list.length; j++) {
@@ -86,36 +131,44 @@ function NoteList(){
 		}
 		this.divNumber = divNumber;
 	}
-	this.illegalRange = function (range){
-		var content = range.cloneContents();
-		if(range.endContainer.parentElement.nodeName == "SPAN"){
-			return true;
-		}
-		while(content.firstChild){
-			if (content.firstChild.nodeName=="SPAN") {
-				return 1;
-			}
-			content.removeChild(content.firstChild);
-		}
-		return 0;
-	}
 	this.remove = function(node){
-		for (var i = 0; i < this.list.length; i++) {
-			if(this.list[i].noteBox==node){
-				document.getElementById("artical").removeChild(this.list[i].textBox);
-				this.list[i].remove();
-				this.list.splice(i,1);
-				this.divNumber--;
-				var tag = document.getElementsByClassName("marked");
-				for (var j = 0; j < this.list.length; j++) {
-					this.list[j].setNumber(j);
-				};
-				break;
-			}
+		var note = this.findNote(node);
+		this.removeTextChild(note);
+		note.textBox.parentNode.removeChild(note.textBox);
+		note.remove();
+		var temp = this.list.indexOf(note);
+		this.list.splice(temp,1);
+		this.divNumber--;
+		var tag = document.getElementsByClassName(this.type.toString());
+		for (var j = 0; j < this.list.length; j++) {
+			this.list[j].setNumber(j);
 		};
 	}
+	this.findNote = function(node){
+		for (var i = 0; i < this.list.length; i++) {
+			if (this.list[i].noteBox == node || this.list[i].textBox == node) {
+				return this.list[i];
+			}
+		}
+	}
+	this.removeTextChild = function(note){
+		var textBox = note.textBox;
+		var className = textBox.className;
+		var child = textBox.firstChild;
+		do {
+			if (child.className != className) {
+				if (child.className == "local") {
+					localList.remove(child);
+				}else if (child.className == "global") {
+					globalList.remove(child);
+				};
+			};
+		} while (child = child.nextSibling);
+	}
 }
-function Note(){
+function Note( type, list ){
+	this.type = type;
+	this.list = list;
 	this.textBox;
 	this.noteBox;
 	this.textNum;
@@ -124,11 +177,12 @@ function Note(){
 	this.range  = range;
 	this.text   = this.range.toString();
 	this.comment= document.getElementById("comment").value;
+
 	this.addNote = function(){
 		var span = document.createElement("span");
 		var txt = document.createTextNode(this.text);
 		this.textNum = document.createElement("sup");
-		span.className = "marked";
+		span.className = this.type.toString();
 		span.appendChild(txt);
 		span.appendChild(this.textNum);
 		this.range.deleteContents();
@@ -138,13 +192,14 @@ function Note(){
 		this.noteNum = document.createElement("span");
 		var comment = document.createTextNode(this.comment);
 		var img = document.createElement("img");
-		img.addEventListener("click",function(){noteList.remove(this.parentNode)},false);
+		list = this.list;
+		img.addEventListener("click",function(){list.remove(this.parentNode)},false);
 		img.src = "http://"+window.location.host+"/ats/img/close.gif";
 		div.appendChild(this.noteNum);
 		div.appendChild(comment);
 		div.appendChild(img);
 		this.noteBox = div;
-		var note = document.getElementById("note");
+		var note = document.getElementById(this.type+"Note");
 		note.appendChild(div);
 	}
 	this.setNumber = function(num){
@@ -156,7 +211,7 @@ function Note(){
 		this.range.deleteContents();
 		var txt = document.createTextNode(this.text);
 		this.range.insertNode(txt);
-		var note = document.getElementById("note");
+		var note = document.getElementById(this.type+"Note");
 		note.removeChild(this.noteBox);
 	}
 }
