@@ -10,12 +10,12 @@
 
 	if ($deleteType == "artical") {
 		removeArticals($deleteId);
-		echo "success";
+		echo "delete artical success";
 		$location = "Location:./artical_list.php";
 		header($location);
 	}else if ($deleteType == "comment") {
 		deleteComment($deleteId);
-		echo "success";
+		echo "delete comment success";
 		$location = "Location:./artical.php?aid=";
 		header($location);
 	}
@@ -47,16 +47,12 @@
 	}
 	function deleteArtical($id){
 		$sql = "DELETE FROM `artical` WHERE artical_id=$id";
-		mysql_query;
+		mysql_query($sql);
 		removeComments($id);
 	}
 	function removeComments($id){
-		$sql = "SELECT * FORM `comments` WHERE father_artical=$id";
-		$result = mysql_query($sql);
-		for ($i = 0; $i < mysql_num_rows($result); $i++) {
-			$row = mysql_fetch_array($result);
-			deleteComments($row['comments_id']);
-		}
+		$sql = "DELETE FROM `comments` WHERE father_artical=$id";
+		mysql_query($sql);
 	}
 	function deleteComment($id){
 		$sql = "DELETE FROM `comments` WHERE comments_id=$id";

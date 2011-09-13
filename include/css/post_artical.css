@@ -8,8 +8,10 @@ img{
 	margin:auto;
 	padding:20px;
 }
-	#post_artical td{
-		padding:3px;
+	}
+	#dialog{
+		width:700px;
+		height:150px;
 	}
 	#content{
 		width:700px;

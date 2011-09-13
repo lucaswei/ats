@@ -23,6 +23,18 @@ ul>li>a{
 	background:url('../../img/img04.jpg') repeat-x;
 	position:relative;
 }
+	#header a:link {
+		color:#fff;
+		text-decoration:none;
+	}
+	#header a:visited {
+		color:#fff;
+		text-decoration:none;
+	}
+	#header a:hover {
+		color:#000;
+		text-decoration:none;
+	}
 	#title{
 		position:relative;
 		font-size:32px;
@@ -55,22 +67,10 @@ ul>li>a{
 		margin:auto;
 		text-align:center;
 	}
-		#navigator a:link {
-			color:#000;
-			text-decoration:none;
-		}
-		#navigator a:visited {
-			color:#fff;
-			text-decoration:none;
-		}
-		#navigator a:hover {
-			color:#000;
-			text-decoration:none;
-		}
 	#navigator > ul{
 		margin:0;
 	}
-	#navigator >ul>li{
+	#navigator>ul>li{
 		float:left;
 		width:130px;
 		height:42px;
@@ -99,7 +99,7 @@ ul>li>a{
 		}
 		#navigator>ul>li>ul>li:hover {
 			background:#fff;
-			color:#444;
+			color:#000;
 			font-weight:bold;
 		}
 		#navigator>ul>li:hover ul{

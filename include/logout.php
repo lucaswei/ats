@@ -2,9 +2,7 @@
 	session_start();
 	session_unset();
 	session_destroy();
+	$location = "Location:./index.php";
+	header($location);
 ?>
 
-<script language=javascript> 
-	parent.left.location.href="function.html" 
-	parent.right.location.href="index.html" 
-</script> 

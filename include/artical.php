@@ -31,6 +31,9 @@ foreach ($articals as $artical) {
 		$output .= "<div class='artical'>\n";
 		$output .= "\t<div class='infomation'>".infomation($artical['artical_id'])."</div>";
 		$output .= "\t<div class='functionList'>".functionList($artical['father_artical'], $artical['artical_id'])."</div>";
+		$output .= "<div class='caption'>Dialog</div>";
+		$output .= "\t<p class='paragraph'>{$artical['dialog']}</p>\n";
+		$output .= "<div class='caption'>Content</div>";
 		$output .= "\t<p class='paragraph'>{$artical['contents']}</p>\n";
 		$output .= "\t<div class='comments'>";
 		$output .= createCommentDiv($artical['artical_id']);

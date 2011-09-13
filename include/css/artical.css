@@ -35,6 +35,14 @@ h2{
 		padding:20px;
 		margin:auto;
 	}
+	.caption{
+		width:738px;
+		text-align:center;
+		border-right:1px #444 solid;
+		border-left:1px #444 solid;
+		margin:auto;
+		background:#ffcb78;
+	}
 	.paragraph{
 		background:#fff;
 		padding:19px;

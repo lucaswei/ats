@@ -1,7 +1,8 @@
 <?php
+session_start();
 require_once('./.sqlinfo.php');
-if ($_SESSION['user_id')=="") {
-	return;
+if ($_SESSION['user_id'] == ""){
+	return ;
 }
 $user = $_SESSION['account'];
 $father_artical = $_GET['father_artical'];
@@ -19,6 +20,9 @@ while($row = mysql_fetch_array($result)){
 <html>
 <head>
 <link rel= "stylesheet " type= "text/css" href="css/post_artical.css" />
+<script type="text/javascript" src="./javascript/jquery.js"></script>
+<script type="text/javascript" >
+</script>
 </head>
 <body>
 <div id="main">
@@ -28,12 +32,12 @@ while($row = mysql_fetch_array($result)){
 		<form action="./save_artical.php" method="post">
 		<table id="post_artical">
 			<tr>
-				<td>Title</td>
+				<td><h2>Title:</h2></td>
 				<td><input type="text" name="title" id=""/></td>
 			</tr>
 			<input type="hidden" name="father_artical" value="<?php echo $father_artical;?>"/>
 			<tr>
-				<td>Class</td>
+				<td><h2>Class:</h2></td>
 				<td>
 					<select name="class">
 						<?php
@@ -41,6 +45,15 @@ while($row = mysql_fetch_array($result)){
 						?>
 					</select>
 				</td>
+			</tr>
+			<tr>
+				<td><h2>Dialog:</h2>if you have somthing to say...</td>
+			</tr>
+			<tr>
+				<td colspan="2"><textarea id="dialog" name="dialog"></textarea></td>
+			</tr>
+			<tr>
+				<td><h2>Content:</h2>write down your artical here...</td>
 			</tr>
 			<tr>
 				<td colspan="2"><textarea id="content" name="content"></textarea></td>

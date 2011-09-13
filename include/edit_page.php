@@ -4,7 +4,17 @@ if ($aid == "") {
 	echo "Wrong access";
 	return;
 }
+session_start();
 require_once("./.sqlinfo.php");
+if ($_SESSION['level'] < 2 ) {
+	$father_artical = $_GET['aid'];
+	$sql = "SELECT * FROM `comments` WHERE father_artical=$father_artical";
+	$result = mysql_query($sql);
+	if (mysql_num_rows($result) > 2 ) {
+		echo "It has beem the limit of comments!";
+		return;
+	}
+}
 $sql = "SELECT * FROM `artical` WHERE artical_id=$aid";
 $result = mysql_query($sql) or die("connect to mysql fail");
 $row = mysql_fetch_array($result);
@@ -38,7 +48,7 @@ $(window).load( function(){init();});
 			</div>
 		</div>
 		<div id="content">
-			<div>Artical:</div>
+			<h2>Artical:</h2>
 			<div id="artical">
 			<?php
 			echo $artical;
@@ -46,10 +56,10 @@ $(window).load( function(){init();});
 			</div>
 			<div id="selectNotice">
 			</div>
-			<div>Global comments:</div>
+			<h2>Global comments:</h2>
 			<div id="globalNote">
 			</div>
-			<div>Local comments:</div>
+			<h2>Local comments:</h2>
 			<div id="localNote">
 			</div>
 			<form method="post" action="save_comment.php" id="submit" >
@@ -62,9 +72,9 @@ $(window).load( function(){init();});
 				<input type="submit" value="Submit your comments!" />
 			</form>
 		</div>
-	<?php
-		require_once('footer.php');
-	?>
 	</div>
+<?php
+	require_once('footer.php');
+?>
 </body>
 </html>

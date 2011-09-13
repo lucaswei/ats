@@ -9,14 +9,15 @@ if (!isset($user_id)) {
 $title = mysql_real_escape_string(htmlspecialchars($_POST['title']));
 $father_artical = $_POST['father_artical'];
 $class = $_POST['class'];
+$dialog  = mysql_real_escape_string(htmlspecialchars($_POST['dialog']));
 $content = mysql_real_escape_string(htmlspecialchars($_POST['content']));
 $time = time();
 if($father_artical ==""){
 	$father_artical = 0;
 }
 
-$sql  = "INSERT INTO `artical` (editor, title, contents, time, class, father_artical) ";
-$sql .= "VALUES ('$user_id', '$title', '$content', '$time', '$class', '$father_artical')";
+$sql  = "INSERT INTO `artical` (editor, title, contents, dialog, time, class, father_artical) ";
+$sql .= "VALUES ('$user_id', '$title', '$content', '$dialog', '$time', '$class', '$father_artical')";
 $result = mysql_query($sql) or die('insert artical failed');
 
 if ($father_artical == 0) {
@@ -25,4 +26,6 @@ if ($father_artical == 0) {
 	$result = mysql_query($sql);
 }
 echo "save artical success!";
+$location = "Location:./artical.php?aid=$father_artical";
+header($location);
 ?>

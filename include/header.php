@@ -67,20 +67,15 @@ function getNavigator($level){
 		$navigator .= "<li>Personal</li>";
 	}else if ($level == 3){
 		$navigator .= "<li><a href='index.php'>Index</a></li>";
-		$navigator .= "<li>Post";
-		$navigator .= "<ul><li><a href='post_artical.php'>Post</a></li>";
-		$navigator .= "<li><a href='artical_list.php'>Comment</a></li></ul>";
-		$navigator .= "</li>";
-		$navigator .= "<li>Article<ul><li><a href='artical_list.php?search=own'>Posted</a></li><li><a href='artical_list.php?search=commented'>Commented</a></li></ul></li>";
 		$navigator .= "<li>Announce<ul><li>Course</li><li>System</li></ul></li>";
-		$navigator .= "<li>Class</li>";
+		$navigator .= "<li><a href='post_artical.php'>Post Artical</a></li>";
+		$navigator .= "<li>Manage Article<ul><li><a href='artical_list.php'>All Artical</a></li><li><a href='artical_list.php?search=own'>My Own</a></li><li><a href='artical_list.php?search=commented'>Commented</a></li></ul></li>";
 		$navigator .= "<li>Personal</li>";
 	}else{
 		$navigator .= "<li><a href='index.php'>Index</a></li>";
 		$navigator .= "<li>Post</li>";
 		$navigator .= "<li><a href='artical_list.php'>Article</a></li>";
 		$navigator .= "<li>Announce</li>";
-		$navigator .= "<li>Class</li>";
 		$navigator .= "<li>Personal</li>";
 	}
 	return $navigator;
@@ -89,7 +84,7 @@ function getNavigator($level){
 <link rel= "stylesheet " type= "text/css" href="css/header.css" />
 <div id="header">
 	<div id="banner">
-		<span id="title" >On-line Peer Review System</span>
+		<a href="index.php"><span id="title" >On-line Peer Review System</span></a>
 		<div id="login">
 			<?php
 				echo $login;
